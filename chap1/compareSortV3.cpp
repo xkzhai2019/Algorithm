@@ -2,6 +2,7 @@
 #include "SortTools.h"
 #include "BubbleSort.h"
 #include "SelectSort.h"
+#include "ImprovedBubbleSort.h"
 
 template<typename T>
 void InsertSort(T arr[],int n){
@@ -47,11 +48,13 @@ int main(void){
     int *brr = SortTools::generateNearlyOrderedArr(N,n);
     int *crr = SortTools::generateNearlyOrderedArr(N,n);
     int *drr = SortTools::generateNearlyOrderedArr(N,n);
+    int *err = SortTools::generateNearlyOrderedArr(N,n);
 
     SortTools::testSort("Bubble Sort",BubbleSort,arr,N);    
     SortTools::testSort("Select Sort",SelectionSort,brr,N);    
     SortTools::testSort("Insert Sort",InsertSort,crr,N);    
     SortTools::testSort("ImprovedInsert Sort",ImprovedInsertSort,drr,N);    
+    SortTools::testSort("ImprovedBubble Sort",ImprovedBubbleSort,err,N);    
 
 	return 0;
 }

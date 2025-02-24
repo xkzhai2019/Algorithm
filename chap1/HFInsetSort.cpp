@@ -2,25 +2,28 @@
 #include "SortTools.h"
 #include "BubbleSort.h"
 #include "SelectSort.h"
-#include "ImprovedBubbleSort.h"
 
 template<typename T>
-void InsertSort(T arr[],int n){
+void HFInsertSort(T arr[],int n){
+    int left=0,right=0;
+    int mid;
     for(int i=1;i<n;i++){
-        // 寻找arr[i]合适的插入位置
-        /*
-        for(int j=i;j>0;j--){
-            if(arr[j]<arr[j-1]){
-                swap(arr[j-1],arr[j]);
+        T tmp = arr[i];
+        // 利用二分法寻找arr[i]合适的插入位置
+        left = 0;
+        right = i-1;
+        while(left<=right){
+            mid = (left + right)/2;
+            if(arr[mid] > tmp){
+                right = mid - 1;
             }else{
-                break;
+                left = mid + 1;
             }
         }
-        */
-        // 写法2
-        for(int j=i; j>0 && arr[j]<arr[j-1]; j--){
-            swap(arr[j-1],arr[j]);
+        for(int j=i;j>left;j--){
+            arr[j] = arr[j-1];
         }
+        arr[left]=tmp;
     }
 }
 
@@ -42,26 +45,16 @@ void ImprovedInsertSort(T arr[],int n){
 }
 
 int main(void){
-    int N = 20000;
-    /* 
+    int N = 50000;
     int *arr = SortTools::generateRandomArr(N,0,100000);
     int *brr = SortTools::generateRandomArr(N,0,100000);
     int *crr = SortTools::generateRandomArr(N,0,100000);
     int *drr = SortTools::generateRandomArr(N,0,100000);
-    int *err = SortTools::generateRandomArr(N,0,100000);
-    */
-    
-    int *arr = SortTools::generateRandomArr(N,0,3);
-    int *brr = SortTools::generateRandomArr(N,0,3);
-    int *crr = SortTools::generateRandomArr(N,0,3);
-    int *drr = SortTools::generateRandomArr(N,0,3);
-    int *err = SortTools::generateRandomArr(N,0,3);
     
     SortTools::testSort("Bubble Sort",BubbleSort,arr,N);    
     SortTools::testSort("Select Sort",SelectionSort,brr,N);    
-    SortTools::testSort("Insert Sort",InsertSort,crr,N);    
+    SortTools::testSort("HFInsert Sort",HFInsertSort,crr,N);    
     SortTools::testSort("ImprovedInsert Sort",ImprovedInsertSort,drr,N);    
-    SortTools::testSort("ImprovedBubble Sort",ImprovedBubbleSort,err,N);    
 
 	return 0;
 }
