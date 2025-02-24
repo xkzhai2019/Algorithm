@@ -17,7 +17,6 @@ void printArr(int arr[], int length){
         cout<<arr[i]<<" ";
     }
     cout<<endl;
-    
 }
 
 int main(void){
