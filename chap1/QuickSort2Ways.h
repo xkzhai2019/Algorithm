@@ -1,4 +1,6 @@
 #include <iostream>
+#include "ImprovedInsertSort.h"
+using namespace std;
 
 // 对arr[l,...,r]进行分割，分割为三部分
 // 返回p，使得arr[l,...,p-1] <= arr[p];  arr[p+1,...,r]=> arr[p]
