@@ -25,21 +25,21 @@ int main(){
     for(int i=0;i<n;i++){
         cin>>d[i];
     }
-    int l = 1;
-    int r = l;
+    int left = 1;
+    int right = l;
     int mid;
-    while(l<r){
-        mid = (l+r)/2;
+    while(left<right){
+        mid = (left+right)/2;
         if(removeAndCount(mid)<=m){
-            l = mid + 1;            
+            left = mid + 1;            
         }else{
-            r = mid;
+            right = mid;
         }
     }
-    if(removeAndCount(l)>m){
-        l--;
+    if(removeAndCount(left)>m){
+        left--;
     }
-    cout<<l<<endl;
+    cout<<left<<endl;
 
     return 0;
 }
