@@ -6,8 +6,8 @@
 template<typename T>
 void merge(T arr[], int l, int mid, int r){
     // 将arr[l,...,mid] 和 arr[mid+1,...,r]归并
-    SortTools::printArr(arr+l,r-l+1);
     // 复制一份arr
+    SortTools::printArr(arr+l,r-l+1);
     T *brr = new T[r-l+1];
     for(int i=0;i<r-l+1;i++){
         brr[i] = arr[i+l];
@@ -70,6 +70,7 @@ void mergeSortBU(T arr[],int n){
                                     // 2*sz~3*sz-1 和 3*sz ~ 4*sz-1
             merge(arr,i,i+sz-1,i+2*sz-1);
         }
+        SortTools::printArr(arr,n);
     }
 }
 
