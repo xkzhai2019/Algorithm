@@ -1,15 +1,19 @@
 #include <iostream>
 #include <cassert>
+#include <vector>
 using namespace std;
-int number;
-// 递归计算斐波那契数列
+
+vector<int> memo;
+
+// 动态规划计算斐波那契数列
 int fib(int n){
-    number++;
-    assert(n>=1);
-    if(n==1 || n==2){
-        return 1;
+    memo = vector<int>(n+1,-1);
+    memo[0] = 0;
+    memo[1] = 1;
+    for(int i=2;i<=n;i++){
+        memo[i] = memo[i-1] + memo[i-2];
     }
-    return fib(n-1) + fib(n-2);
+    return memo[n];
 }
 
 int main(){
@@ -20,6 +24,5 @@ int main(){
     time_t endTime = clock();
     cout<<"fib("<<n<<")="<<res<<endl;
     cout<<"time:"<<double(endTime-startTime)/CLOCKS_PER_SEC<<"s"<<endl;
-    cout<<"call fib(): "<<number<<" times."<<endl;
     return 0;
 }
