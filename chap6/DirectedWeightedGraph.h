@@ -5,7 +5,9 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <cassert>
 #include "AVLMap.h"
+
 using namespace std;
 // 带权图（支持有向，无向）
 class DirectedWeightedGraph{
@@ -48,6 +50,27 @@ class DirectedWeightedGraph{
                 inFile.close();
             }else{
                 cout<<"no this file"<<endl;
+            }
+        }
+        DirectedWeightedGraph(int V, bool directed){
+            this->V = V;
+            this->directed = directed;
+            this->E = 0;
+
+            adj = new AVLMap<int,int>*[V];    
+            for(int i=0;i<V;i++){
+                adj[i] = new AVLMap<int,int>();
+            }
+        }
+        void addEdge(int a, int b, int w){
+            validateVertex(a);
+            validateVertex(b);
+            
+            assert(a!=b);
+            assert(!adj[a]->contains(b));
+            adj[a]->add(b,w);
+            if(!directed){
+                adj[b]->add(a,w);
             }
         }
         bool isDirected(){
