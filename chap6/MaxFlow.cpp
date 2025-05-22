@@ -113,5 +113,9 @@ int main(){
             cout<<v<<"-"<<w<<":"<<maxflow2->flow(v,w)<<"/"<<network2->getWeight(v,w)<<endl;
         }
     }
+    // baseball
+    DirectedWeightedGraph *network3 = new DirectedWeightedGraph("baseball.txt",true);
+    MaxFlow *maxflow3 = new MaxFlow(network3,0,10);
+    cout<<maxflow3->result()<<endl;
     return 0;
 }
