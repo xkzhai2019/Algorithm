@@ -31,21 +31,21 @@ class DirectedWeightedGraph{
                 }
                 
                 inFile >> E;
-                int a,b,weight;
+                int v,w,weight;
                 for(int i = 0; i < E; i++){
-                    inFile >> a >> b >> weight;
-                    validateVertex(a);
-                    validateVertex(b);
-                    if(a==b){
+                    inFile >> v >> w >> weight;
+                    validateVertex(v);
+                    validateVertex(w);
+                    if(v==w){
                         throw "self loop is detected";
                     }
-                    if(adj[a]->contains(b)){
+                    if(adj[v]->contains(w)){
                         throw "parallel edges are detected";
                     }
 
-                    adj[a]->add(b,weight);
+                    adj[v]->add(w,weight);
                     if(!directed)
-                        adj[b]->add(a,weight);
+                        adj[w]->add(v,weight);
                 }
                 inFile.close();
             }else{
@@ -62,15 +62,25 @@ class DirectedWeightedGraph{
                 adj[i] = new AVLMap<int,int>();
             }
         }
-        void addEdge(int a, int b, int w){
-            validateVertex(a);
-            validateVertex(b);
+        void addEdge(int v, int w, int weight){
+            validateVertex(v);
+            validateVertex(w);
             
-            assert(a!=b);
-            assert(!adj[a]->contains(b));
-            adj[a]->add(b,w);
+            assert(v!=w);
+            assert(!adj[v]->contains(w));
+            adj[v]->add(w,weight);
             if(!directed){
-                adj[b]->add(a,w);
+                adj[w]->add(v,weight);
+            }
+        }
+        void setWeight(int v, int w, int newWeight){
+            validateVertex(v);
+            validateVertex(w);
+           assert(hasEdge(v,w));
+
+            adj[v]->set(w,newWeight);
+            if(!directed){
+                adj[w]->set(v,newWeight);
             }
         }
         bool isDirected(){
