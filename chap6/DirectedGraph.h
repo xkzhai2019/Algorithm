@@ -2,7 +2,7 @@
 #define DIRECTEDGRAPH_H
 
 #include <iostream>
-
+#include <cassert>
 #include <vector>
 #include <fstream>
 #include <string>
@@ -49,6 +49,26 @@ class DirectedGraph{
                 inFile.close();
             }else{
                 cout<<"no this file"<<endl;
+            }
+        }
+        DirectedGraph(int V, bool directed){
+            this->V = V;
+            this->directed = directed;
+            this->E = 0;
+
+            adj = new AVLSet<int>*[V];    
+            for(int i=0;i<V;i++){
+                adj[i] = new AVLSet<int>();
+            }   
+        }
+        void addEdge(int v, int w){
+            validateVertex(v);
+            validateVertex(w);
+            assert(v!=w);
+            assert(!adj[v]->contains(w));
+            adj[v]->add(w);
+            if(!directed){
+                adj[w]->add(v);
             }
         }
         bool isDirected(){
